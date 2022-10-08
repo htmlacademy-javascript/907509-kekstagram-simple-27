@@ -9,6 +9,9 @@ const getRandomInt = function (min, max) {
 
 getRandomInt(0, 100);
 
-const getStringLenth = (string, maxLength) => string.length <= maxLength;
+const getStringLenth = function (string, maxLength) {
+  const stringLenth = string.split('');
+  return stringLenth.length < maxLength;
+};
 
 getStringLenth('find string length', 5);
