@@ -7,9 +7,7 @@ const getRandomInt = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-getRandomInt(0, 100);
-
 const getStringLength = (string, maxLength) => string.length <= maxLength;
 getStringLength('find string length', 5);
 
-export {getRandomInt};
+export {getRandomInt, getStringLength};

@@ -1,5 +1,6 @@
-import {photoDescriptions} from './data.js';
+import {generatePhotoData} from './data.js';
+import {renderPictures} from './render-pics.js';
 
-const getArrayLength = () => photoDescriptions.length;
-getArrayLength();
-//функция-заглушка для линтера
+renderPictures(generatePhotoData());
+
+
