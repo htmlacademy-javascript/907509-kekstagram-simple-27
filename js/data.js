@@ -1,6 +1,6 @@
 import {getRandomInt} from './utils.js';
 
-const ARRAY_NUMBER = 25;
+const OBJECTS_COUNT = 25;
 
 const DESCRIPTIONS = [
   'Фотография природы',
@@ -12,14 +12,15 @@ const DESCRIPTIONS = [
   'Торговый зал',
 ];
 
-const getPhotoDescription = (num) => ({
+const generatePhoto = (num) => ({
   id: num + 1,
-  url: `'photos/${num + 1}.jpg'`,
+  url: `photos/${num + 1}.jpg`,
   description: getRandomInt(0, DESCRIPTIONS.length - 1),
   likes: getRandomInt(15, 200),
   comments: getRandomInt(0, 200),
 });
 
-const photoDescriptions = Array.from({length: ARRAY_NUMBER}, (value, num) => getPhotoDescription(num++));
+const generatePhotoData = () => Array.from({length: OBJECTS_COUNT}, (value, num) => generatePhoto(num++));
 
-export {photoDescriptions};
+export {generatePhotoData};
+
