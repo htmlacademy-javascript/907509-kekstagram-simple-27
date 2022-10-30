@@ -10,4 +10,7 @@ const getRandomInt = function (min, max) {
 const getStringLength = (string, maxLength) => string.length <= maxLength;
 getStringLength('find string length', 5);
 
-export {getRandomInt, getStringLength};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInt, getStringLength, isEscapeKey};
+
