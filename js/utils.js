@@ -7,8 +7,7 @@ const getRandomInt = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const getStringLength = (string, maxLength) => string.length <= maxLength;
-getStringLength('find string length', 5);
+const getStringLength = (string, minLength, maxLength) => string.length > minLength && string.length < maxLength;
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 

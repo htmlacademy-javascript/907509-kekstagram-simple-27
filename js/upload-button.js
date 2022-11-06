@@ -1,13 +1,32 @@
-import {onCloseModalClick, onPopupEscKeydown} from './close.js';
+import {isEscapeKey} from './utils.js';
 
-const closeUpload = document.querySelector('#upload-cancel');
+const uploadFile = document.querySelector('#upload-file');
+const closeButton = document.querySelector('#upload-cancel');
 const photoUpload = document.querySelector('.img-upload__overlay');
+const inputComment = document.querySelector('.text__description');
+
+const onPopupEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    onCloseModalClick();
+  }
+};
 
 const uploadPicture = () => {
   photoUpload.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  closeUpload.addEventListener('click', onCloseModalClick);
+  closeButton.addEventListener('click', onCloseModalClick);
   document.addEventListener('keydown', onPopupEscKeydown);
 };
 
-export {uploadPicture};
+function onCloseModalClick () {
+  photoUpload.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  closeButton.removeEventListener('click', onCloseModalClick);
+  uploadFile.value = '';
+  inputComment.value = '';
+}
+
+uploadFile.addEventListener('change', uploadPicture);
+
