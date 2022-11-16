@@ -1,7 +1,7 @@
-const sliderElement = document.querySelector('.effect-level__slider');
+/*const sliderElement = document.querySelector('.effect-level__slider');
 //const effectLevelValue = document.querySelector('.effect-level__value');
-const effectsRadio = document.querySelectorAll('.effects__radio');
-const imagePreview = document.querySelector('.img-upload__preview');
+const imgUploadForm = document.querySelector('.img-upload__form');
+//const imagePreview = document.querySelector('.img-upload__preview');
 const sliderWrapper = document.querySelector('.img-upload__effect-level');
 
 const effects = {
@@ -38,30 +38,37 @@ noUiSlider.create(sliderElement, {
   },
 });
 
-const effectsKeysArray = Object.keys(effects);
+const onSliderOptions = (minValue, maxValue, startValue, stepValue) => {
+  effectLevelSlider.noUiSlider.updateOptions({
+    range: {
+      min: minValue,
+      max: maxValue,
+    },
+    start: startValue,
+    step: stepValue,
+  });
+};
 
-const setEffect = () => {
-  effectsRadio.addEventListener('change', (evt) => {
+const effectsKeys = Object.keys(effects);
+
+/* const getEffect = (keys) => {
+
+  imgUploadForm.addEventListener('change', (evt) => {
     if (evt.target.checked && evt.target.value !== 'none') {
 
       sliderWrapper.classList.remove('visually-hidden');
 
-      for (const effect of effectsRadio) {
-        if(effectsRadio[effect].value === effectsKeysArray[effect]) {
-          imagePreview.classList.add(effect.effectListItems[effect].HTML_CLASS);
-          sliderElement.noUiSlider.updateOptions({
-            range: {
-              min: effect.effectListItems[effect].MIN,
-              max: effect.effectListItems[effect].MAX
-            },
-            start: effect.effectListItems[effect].START,
-            step: effect.effectListItems[effect].STEP
-          });
-        }
-      }
+      evt.target.addEventListener('click', () => {
+        for (let i = 0; i <= keys.length; i++) {
+          if(evt.target.includes('#effect-`${keys.[i]`'))
+       }
+
+      } );
+
     } else {
       sliderWrapper.classList.add('visually-hidden');
-    }});
+    }
+  }
+  );
 };
-setEffect(effects);
-
+*/
