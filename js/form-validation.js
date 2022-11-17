@@ -9,9 +9,7 @@ const inputComment = document.querySelector('.text__description');
 
 const onValidationComment = (evt) => {
   const isValidationTextLength = getStringLength(inputComment.value, MIN_COMMENTS_LENGHT, MAX_COMMENTS_LENGHT);
-  if(inputComment.value !== '') {
-    evt.preventDefault();
-  }
+
   if(!isValidationTextLength) {
     inputComment.setCustomValidity(`Комментарий обязателен и не может быть меньше ${MIN_COMMENTS_LENGHT} символов,
      и не может быть больше ${MAX_COMMENTS_LENGHT} символов.`);
