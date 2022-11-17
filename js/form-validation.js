@@ -7,13 +7,11 @@ const VALID_INPUT_STYLE = 'green';
 
 const inputComment = document.querySelector('.text__description');
 
-const validationComment = (evt) => {
-  const validationTextLength = getStringLength(inputComment.value, MIN_COMMENTS_LENGHT, MAX_COMMENTS_LENGHT);
-  if(inputComment.required === true) {
-    evt.preventDefault();
-  }
-  if(!validationTextLength) {
-    inputComment.setCustomValidity(`Комментарий не может быть меньше ${MIN_COMMENTS_LENGHT} символов,
+const onValidationComment = (evt) => {
+  const isValidationTextLength = getStringLength(inputComment.value, MIN_COMMENTS_LENGHT, MAX_COMMENTS_LENGHT);
+
+  if(!isValidationTextLength) {
+    inputComment.setCustomValidity(`Комментарий обязателен и не может быть меньше ${MIN_COMMENTS_LENGHT} символов,
      и не может быть больше ${MAX_COMMENTS_LENGHT} символов.`);
     inputComment.style.outlineColor = INVALID_INPUT_STYLE;
     evt.preventDefault();
@@ -24,4 +22,4 @@ const validationComment = (evt) => {
   inputComment.reportValidity();
 };
 
-inputComment.addEventListener('input', validationComment);
+inputComment.addEventListener('input', onValidationComment);
