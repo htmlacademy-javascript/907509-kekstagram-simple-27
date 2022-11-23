@@ -16,7 +16,7 @@ const EFFECTS = [
     style: 'grayscale',
     min: 0,
     max: 1,
-    start: 0,
+    start: 1,
     step: 0.1,
     unit: '',
   },
@@ -25,7 +25,7 @@ const EFFECTS = [
     style: 'sepia',
     min: 0,
     max: 1,
-    start: 0,
+    start: 1,
     step: 0.1,
     unit: '',
   },
@@ -34,7 +34,7 @@ const EFFECTS = [
     style: 'invert',
     min: 0,
     max: 100,
-    start: 0,
+    start: 100,
     step: 1,
     unit: '%',
   },
@@ -43,7 +43,7 @@ const EFFECTS = [
     style: 'blur',
     min: 0,
     max: 3,
-    start: 0,
+    start: 3,
     step: 0.1,
     unit: 'px',
   },
@@ -52,7 +52,7 @@ const EFFECTS = [
     style: 'brightness',
     min: 1,
     max: 3,
-    start: 0,
+    start: 3,
     step: 0.1,
     unit: '',
   },
@@ -75,25 +75,25 @@ noUiSlider.create(sliderElement, {
   },
 });
 
-const updateSlider = () => {
+const updateSlider = (currentEffect) => {
   sliderElement.noUiSlider.updateOptions({
     range: {
-      min: chosenEffect.min,
-      max: chosenEffect.max,
+      min: currentEffect.min,
+      max: currentEffect.max,
     },
-    start: chosenEffect.start,
-    step: chosenEffect.step,
+    start: currentEffect.start,
+    step: currentEffect.step,
   });
 };
 
-const getEffect = () => {
+const onChangeEffect = () => {
 
   imgUploadForm.addEventListener('change', (evt) => {
     if (evt.target.checked && evt.target.value !== 'none') {
 
       sliderWrapper.classList.remove('visually-hidden');
       chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
-
+      updateSlider(chosenEffect);
       sliderElement.noUiSlider.on('update', () => {
         const sliderValue = sliderElement.noUiSlider.get();
         effectLevel.value = sliderValue;
@@ -106,5 +106,4 @@ const getEffect = () => {
     }});
 };
 
-updateSlider();
-getEffect();
+onChangeEffect();
