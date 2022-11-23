@@ -66,6 +66,7 @@ const getData = (onSuccess) => {
     .then((photos) => onSuccess(photos))
     .catch(() => showAlert('Ошибка при загрузке фото. Попробуйте ещё раз.'));
 };
+
 getData(renderPictures);
 
 const sendData = (onSuccess, onError) => {
@@ -84,4 +85,4 @@ const sendData = (onSuccess, onError) => {
   });
 };
 
-sendData(onFormSuccessSend, onFormErrorSend);
+export {sendData, onFormSuccessSend, onFormErrorSend};

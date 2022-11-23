@@ -1,4 +1,5 @@
 import {getStringLength} from './utils.js';
+import {sendData, onFormSuccessSend, onFormErrorSend} from './server-interaction.js';
 
 const MIN_COMMENTS_LENGHT = 20;
 const MAX_COMMENTS_LENGHT = 140;
@@ -18,6 +19,7 @@ const onValidationComment = (evt) => {
   } else {
     inputComment.setCustomValidity('');
     inputComment.style.outlineColor = VALID_INPUT_STYLE;
+    sendData(onFormSuccessSend, onFormErrorSend);
   }
   inputComment.reportValidity();
 };
