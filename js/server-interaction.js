@@ -2,11 +2,13 @@ import {renderPictures} from './render-pics.js';
 import {showAlert, isEscapeKey} from './utils.js';
 import {closeModalClick} from './upload-button.js';
 
+
 const imgUploadForm = document.querySelector('.img-upload__form');
 const errorUploadImage = document.querySelector('#error').content.querySelector('section');
 const successUploadImage = document.querySelector('#success').content.querySelector('section');
 const errorFragment = document.createDocumentFragment();
 const successFragment = document.createDocumentFragment();
+const submitButton = imgUploadForm.querySelector('#upload-submit');
 
 const closeModalMessage = (messageTemplate, messageCloseButton, messageInner) => {
   messageCloseButton.addEventListener('click', () => {
@@ -66,22 +68,34 @@ const getData = (onSuccess) => {
     .then((photos) => onSuccess(photos))
     .catch(() => showAlert('Ошибка при загрузке фото. Попробуйте ещё раз.'));
 };
+
 getData(renderPictures);
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправка...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+};
 
 const sendData = (onSuccess, onError) => {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
+    blockSubmitButton();
 
-    const formData = new FormData(evt.target);
-    fetch('https://27.javascript.pages.academy/kekstagram-simple/data',
+    fetch('https://27.javascript.pages.academy/kekstagram-simple',
       {
         method: 'POST',
-        body: formData,
+        body: new FormData(evt.target),
       })
       .then((response) => response.ok ? onSuccess : onError)
+      .then(() => unblockSubmitButton())
       .then(() => onSuccess())
       .catch(() => onError());
   });
 };
 
-sendData(onFormSuccessSend, onFormErrorSend);
+export {sendData, onFormSuccessSend, onFormErrorSend};
+

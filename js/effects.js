@@ -1,4 +1,4 @@
-const sliderElement = document.querySelector('.effect-level__slider');
+const sliderDepthOfEffect = document.querySelector('.effect-level__slider');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imagePreview = document.querySelector('.img-upload__preview img');
 const sliderWrapper = document.querySelector('.img-upload__effect-level');
@@ -61,7 +61,7 @@ const EFFECTS = [
 const DEFAULT_EFFECT = EFFECTS[0];
 let chosenEffect = DEFAULT_EFFECT;
 
-noUiSlider.create(sliderElement, {
+noUiSlider.create(sliderDepthOfEffect, {
   range: {
     min: DEFAULT_EFFECT.min,
     max: DEFAULT_EFFECT.max,
@@ -76,7 +76,7 @@ noUiSlider.create(sliderElement, {
 });
 
 const updateSlider = (currentEffect) => {
-  sliderElement.noUiSlider.updateOptions({
+  sliderDepthOfEffect.noUiSlider.updateOptions({
     range: {
       min: currentEffect.min,
       max: currentEffect.max,
@@ -94,8 +94,8 @@ const onChangeEffect = () => {
       sliderWrapper.classList.remove('visually-hidden');
       chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
       updateSlider(chosenEffect);
-      sliderElement.noUiSlider.on('update', () => {
-        const sliderValue = sliderElement.noUiSlider.get();
+      sliderDepthOfEffect.noUiSlider.on('update', () => {
+        const sliderValue = sliderDepthOfEffect.noUiSlider.get();
         effectLevel.value = sliderValue;
         imagePreview.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
       });
